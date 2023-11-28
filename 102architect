@@ -53,60 +53,76 @@ def reflection_transform(d):
 
     return matrix_product(matrix_product(matrix_3, matrix_2), matrix_1)
 
-args = sys.argv
+def args_verif(args):
+    if len(args) < 3:
+        exit(84)
 
-x = float(args[1])
-y = float(args[2])
-w = 1
-point = [[x * w], [y * w], [w]]
+try:
+    args = sys.argv
+
+    args_verif(args)
+
+    x = float(args[1])
+    y = float(args[2])
+    w = 1
+    point = [[x * w], [y * w], [w]]
 
 
-i = 3
-matrix_list = []
-nb_args = len(args)
-display_instruction_list = []
+    i = 3
+    matrix_list = []
+    nb_args = len(args)
+    display_instruction_list = []
 
-while (i < nb_args):
-    if (args[i] == "-t"):
-        if (i + 2 < nb_args):
-            matrix_list.append(translation_transform(int(args[i + 1]), int(args[i + 2])))
-            display_instruction_list.append("Translation along vector ({}, {})".format(args[i + 1], args[i + 2]))
-            i += 3
-    elif (args[i] == "-z"):
-        if (i + 2< nb_args):
-            matrix_list.append(scaling_transform(int(args[i + 1]), int(args[i + 2])))
-            display_instruction_list.append("Scaling by factors {} and {}".format(args[i + 1], args[i + 2]))
-            i += 3
-    elif (args[i] == "-r"):
-        if (i + 1 < nb_args):
-            matrix_list.append(rotation_transform(int(args[i + 1])))
-            display_instruction_list.append("Rotation by a {} degree angle".format(args[i + 1]))
-            i += 2
-    elif (args[i] == "-s"):
-        if (i + 1 < nb_args):
-            matrix_list.append(reflection_transform(int(args[i + 1])))
-            display_instruction_list.append("Reflection over an axis with an inclination angle of {} degrees".format(args[i + 1]))
-            i += 2
+    while (i < nb_args):
+        if (args[i] == "-t"):
+            if (i + 2 < nb_args):
+                matrix_list.append(translation_transform(int(args[i + 1]), int(args[i + 2])))
+                display_instruction_list.append("Translation along vector ({}, {})".format(args[i + 1], args[i + 2]))
+                i += 3
+            else:
+                exit(84)
+        elif (args[i] == "-z"):
+            if (i + 2< nb_args):
+                matrix_list.append(scaling_transform(int(args[i + 1]), int(args[i + 2])))
+                display_instruction_list.append("Scaling by factors {} and {}".format(args[i + 1], args[i + 2]))
+                i += 3
+            else:
+                exit(84)
+        elif (args[i] == "-r"):
+            if (i + 1 < nb_args):
+                matrix_list.append(rotation_transform(int(args[i + 1])))
+                display_instruction_list.append("Rotation by a {} degree angle".format(args[i + 1]))
+                i += 2
+            else:
+                exit(84)
+        elif (args[i] == "-s"):
+            if (i + 1 < nb_args):
+                matrix_list.append(reflection_transform(int(args[i + 1])))
+                display_instruction_list.append("Reflection over an axis with an inclination angle of {} degrees".format(args[i + 1]))
+                i += 2
+            else:
+                exit(84)
 
-matrix_result = [
-    [1, 0, 0],
-    [0, 1, 0],
-    [0, 0, 1]
-]
+    matrix_result = [
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]
+    ]
 
-for element in reversed(matrix_list):
-    matrix_result = matrix_product(matrix_result, element)
+    for element in reversed(matrix_list):
+        matrix_result = matrix_product(matrix_result, element)
 
-for element in display_instruction_list:
-    print(element)
+    for element in display_instruction_list:
+        print(element)
 
-for row in matrix_result:
-    for value in row:
-        print("{:.2f}".format(value), "\t", end='')
-    print("")
+    for row in matrix_result:
+        for value in row:
+            print("{:.2f}".format(value), "\t", end='')
+        print("")
 
-multiplied_point = matrix_product(matrix_result, point)
+    multiplied_point = matrix_product(matrix_result, point)
 
-print("({:.2f}, {:.2f}) => ({:.2f}, {:.2f})".format(float(args[1]), float(args[2]), multiplied_point[0][0], multiplied_point[1][0]))
-
+    print("({:.2f}, {:.2f}) => ({:.2f}, {:.2f})".format(float(args[1]), float(args[2]), multiplied_point[0][0], multiplied_point[1][0]))
+except:
+    exit(84)
 exit(0)
