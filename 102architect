@@ -51,7 +51,7 @@ def reflection_transform(d):
         [0, 0, 1]
     ]
 
-    return matrix_product(matrix_product(matrix_1, matrix_2), matrix_3)
+    return matrix_product(matrix_product(matrix_3, matrix_2), matrix_1)
 
 args = sys.argv
 
@@ -94,7 +94,7 @@ matrix_result = [
     [0, 0, 1]
 ]
 
-for element in matrix_list:
+for element in reversed(matrix_list):
     matrix_result = matrix_product(matrix_result, element)
 
 for element in display_instruction_list:
