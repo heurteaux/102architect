@@ -101,6 +101,8 @@ try:
                 i += 2
             else:
                 exit(84)
+        else:
+            exit(84)
 
     matrix_result = [
         [1, 0, 0],
