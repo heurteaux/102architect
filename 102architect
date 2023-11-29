@@ -51,7 +51,13 @@ def reflection_transform(d):
         [0, 0, 1]
     ]
 
-    return matrix_product(matrix_1, matrix_product(matrix_3, matrix_2))
+    result = matrix_product(matrix_product(matrix_3, matrix_2), matrix_1)
+    
+    for i in range(len(result)):
+        for j in range(len(result[i])):
+            if (0 > result[i][j] > -0.000000001):
+                result[i][j] = 0.0
+    return result
 
 def args_verif(args):
     if len(args) < 3:
