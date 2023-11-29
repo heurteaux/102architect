@@ -116,8 +116,7 @@ try:
         print(element)
 
     for row in matrix_result:
-        for value in row:
-            print("{:.2f}".format(value), "\t", end='')
+        print("{:.2f}\t{:.2f}\t{:.2f}".format(row[0], row[1], row[2]), end='')
         print("")
 
     multiplied_point = matrix_product(matrix_result, point)
