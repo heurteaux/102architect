@@ -60,7 +60,7 @@ def reflection_transform(d):
     return result
 
 def args_verif(args):
-    if len(args) < 3:
+    if len(args) < 4:
         exit(84)
 
 try:
